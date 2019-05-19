@@ -1,0 +1,51 @@
+{
+  "UserAgent": "MobileHub/1.0",
+  "Version": "1.0",
+  "CredentialsProvider": {
+    "CognitoIdentity": {
+      "Default": {
+        "PoolId": "us-east-1:08c38709-32cd-45e8-b42a-55f353bcc056",
+        "Region": "us-east-1"
+      }
+    }
+  },
+  "IdentityManager": {
+    "Default": {}
+  },
+  "CognitoUserPool": {
+    "Default": {
+      "PoolId": "us-east-1_S4Tt4Q9I2",
+      "AppClientId": "4dpirf31kunet6vd85ugtupqag",
+      "AppClientSecret": "hf3rs7ou15bit15gek3qlfpu2gmar6ofr15dote8mhajr6cs6i6",
+      "Region": "us-east-1"
+    }
+  },
+  "S3TransferUtility": {
+    "Default": {
+      "Bucket": "digitalwardrope-userfiles-mobilehub-1475654551",
+      "Region": "us-east-1"
+    }
+  },
+  "DynamoDBObjectMapper": {
+    "Default": {
+      "Region": "us-east-1"
+    }
+  },
+  "PinpointAnalytics": {
+    "Default": {
+      "AppId": "7c5a2a5aba854303a2d420b48e6dd2b6",
+      "Region": "us-east-1"
+    }
+  },
+  "PinpointTargeting": {
+    "Default": {
+      "Region": "us-east-1"
+    }
+  },
+  "UserFileManager": {
+    "Default": {
+      "Bucket": "digitalwardrope-userfiles-mobilehub-1475654551",
+      "Region": "us-east-1"
+    }
+  }
+}
