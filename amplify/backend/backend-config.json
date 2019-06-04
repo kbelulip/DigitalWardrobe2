@@ -1,0 +1,23 @@
+{
+	"auth": {
+		"digitalwardrobe22670693f": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"api": {
+		"digitalwardrobe2": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"securityType": "AMAZON_COGNITO_USER_POOLS"
+			}
+		}
+	},
+	"storage": {
+		"s3f17944b0": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

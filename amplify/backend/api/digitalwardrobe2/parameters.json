@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "digitalwardrobe2",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authdigitalwardrobe22670693f",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "digitalwardrobe2-master-20190522024018-authRole",
+            "UnauthRoleArn": "arn:aws:iam::732033097737:role/digitalwardrobe2-master-20190522024018-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::732033097737:role/digitalwardrobe2-master-20190522024018-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "digitalwardrobe2-master-20190522024018-deployment",
+            "UnauthRoleName": "digitalwardrobe2-master-20190522024018-unauthRole",
+            "StackName": "digitalwardrobe2-master-20190522024018",
+            "StackId": "arn:aws:cloudformation:us-east-1:732033097737:stack/digitalwardrobe2-master-20190522024018/2d0f9f60-7c2a-11e9-b837-12dffdf25cac"
+        },
+        "categories": {
+            "auth": {
+                "digitalwardrobe22670693f": {}
+            }
+        }
+    }
+}
