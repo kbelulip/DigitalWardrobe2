@@ -2,15 +2,46 @@ type Blog @model {
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
+  user: User @connection
 }
 type Post @model {
   id: ID!
   title: String!
   blog: Blog @connection(name: "BlogPosts")
+  outfit: Outfit @connection
   comments: [Comment] @connection(name: "PostComments")
+  user: User @connection
 }
 type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
+  user: User @connection
 }
+type Kleidung @model {
+  id: ID!
+  bezeichnung: String
+  kategorie: String
+  farbe: String
+  anlass: String
+  foto: String
+  user: User @connection
+}
+type Outfit @model {
+  id: ID!
+  anlass: String
+  kleider: [Kleidung] @connection
+  user: User @connection
+}
+type Kleiderschrank @model {
+  id: ID!
+  bezeichnung: String
+  kleider: [Kleidung] @connection
+  user: User @connection
+}
+type User @model {
+  id: ID!
+  name: String
+  freunde: [User] @connection
+}
+

@@ -10,6 +10,13 @@ mutation CreateBlog($input: CreateBlogInput!) {
       }
       nextToken
     }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
   }
 }
 mutation UpdateBlog($input: UpdateBlogInput!) {
@@ -22,6 +29,13 @@ mutation UpdateBlog($input: UpdateBlogInput!) {
         title
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -36,6 +50,13 @@ mutation DeleteBlog($input: DeleteBlogInput!) {
       }
       nextToken
     }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
   }
 }
 mutation CreatePost($input: CreatePostInput!) {
@@ -48,6 +69,21 @@ mutation CreatePost($input: CreatePostInput!) {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -55,6 +91,13 @@ mutation CreatePost($input: CreatePostInput!) {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -68,6 +111,21 @@ mutation UpdatePost($input: UpdatePostInput!) {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -75,6 +133,13 @@ mutation UpdatePost($input: UpdatePostInput!) {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -88,6 +153,21 @@ mutation DeletePost($input: DeletePostInput!) {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -95,6 +175,13 @@ mutation DeletePost($input: DeletePostInput!) {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -109,7 +196,22 @@ mutation CreateComment($input: CreateCommentInput!) {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
         nextToken
       }
     }
@@ -126,7 +228,22 @@ mutation UpdateComment($input: UpdateCommentInput!) {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
         nextToken
       }
     }
@@ -143,9 +260,258 @@ mutation DeleteComment($input: DeleteCommentInput!) {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateKleidung($input: CreateKleidungInput!) {
+  createKleidung(input: $input) {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateKleidung($input: UpdateKleidungInput!) {
+  updateKleidung(input: $input) {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteKleidung($input: DeleteKleidungInput!) {
+  deleteKleidung(input: $input) {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateOutfit($input: CreateOutfitInput!) {
+  createOutfit(input: $input) {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateOutfit($input: UpdateOutfitInput!) {
+  updateOutfit(input: $input) {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteOutfit($input: DeleteOutfitInput!) {
+  deleteOutfit(input: $input) {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateKleiderschrank($input: CreateKleiderschrankInput!) {
+  createKleiderschrank(input: $input) {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation UpdateKleiderschrank($input: UpdateKleiderschrankInput!) {
+  updateKleiderschrank(input: $input) {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation DeleteKleiderschrank($input: DeleteKleiderschrankInput!) {
+  deleteKleiderschrank(input: $input) {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+  }
+}
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+  }
+}
+mutation DeleteUser($input: DeleteUserInput!) {
+  deleteUser(input: $input) {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
     }
   }
 }

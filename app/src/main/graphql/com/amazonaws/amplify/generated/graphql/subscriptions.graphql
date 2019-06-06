@@ -10,6 +10,13 @@ subscription OnCreateBlog {
       }
       nextToken
     }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
   }
 }
 subscription OnUpdateBlog {
@@ -22,6 +29,13 @@ subscription OnUpdateBlog {
         title
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -36,6 +50,13 @@ subscription OnDeleteBlog {
       }
       nextToken
     }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
   }
 }
 subscription OnCreatePost {
@@ -48,6 +69,21 @@ subscription OnCreatePost {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -55,6 +91,13 @@ subscription OnCreatePost {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -68,6 +111,21 @@ subscription OnUpdatePost {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -75,6 +133,13 @@ subscription OnUpdatePost {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -88,6 +153,21 @@ subscription OnDeletePost {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -95,6 +175,13 @@ subscription OnDeletePost {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -109,7 +196,22 @@ subscription OnCreateComment {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
         nextToken
       }
     }
@@ -126,7 +228,22 @@ subscription OnUpdateComment {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
         nextToken
       }
     }
@@ -143,9 +260,258 @@ subscription OnDeleteComment {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateKleidung {
+  onCreateKleidung {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateKleidung {
+  onUpdateKleidung {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteKleidung {
+  onDeleteKleidung {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateOutfit {
+  onCreateOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateOutfit {
+  onUpdateOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteOutfit {
+  onDeleteOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateKleiderschrank {
+  onCreateKleiderschrank {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateKleiderschrank {
+  onUpdateKleiderschrank {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteKleiderschrank {
+  onDeleteKleiderschrank {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateUser {
+  onCreateUser {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateUser {
+  onUpdateUser {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteUser {
+  onDeleteUser {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
     }
   }
 }

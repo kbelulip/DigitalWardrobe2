@@ -10,6 +10,13 @@ query GetBlog($id: ID!) {
       }
       nextToken
     }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
   }
 }
 query ListBlogs(
@@ -23,6 +30,10 @@ query ListBlogs(
       name
       posts {
         nextToken
+      }
+      user {
+        id
+        name
       }
     }
     nextToken
@@ -38,6 +49,21 @@ query GetPost($id: ID!) {
       posts {
         nextToken
       }
+      user {
+        id
+        name
+      }
+    }
+    outfit {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
     }
     comments {
       items {
@@ -45,6 +71,13 @@ query GetPost($id: ID!) {
         content
       }
       nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
     }
   }
 }
@@ -61,8 +94,16 @@ query ListPosts(
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
         nextToken
+      }
+      user {
+        id
+        name
       }
     }
     nextToken
@@ -79,7 +120,22 @@ query GetComment($id: ID!) {
         id
         name
       }
+      outfit {
+        id
+        anlass
+      }
       comments {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    user {
+      id
+      name
+      freunde {
         nextToken
       }
     }
@@ -97,6 +153,165 @@ query ListComments(
       post {
         id
         title
+      }
+      user {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+query GetKleidung($id: ID!) {
+  getKleidung(id: $id) {
+    id
+    bezeichnung
+    kategorie
+    farbe
+    anlass
+    foto
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+query ListKleidungs(
+  $filter: ModelKleidungFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listKleidungs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      bezeichnung
+      kategorie
+      farbe
+      anlass
+      foto
+      user {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+query GetOutfit($id: ID!) {
+  getOutfit(id: $id) {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+query ListOutfits(
+  $filter: ModelOutfitFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOutfits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      anlass
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+query GetKleiderschrank($id: ID!) {
+  getKleiderschrank(id: $id) {
+    id
+    bezeichnung
+    kleider {
+      items {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+      }
+      nextToken
+    }
+    user {
+      id
+      name
+      freunde {
+        nextToken
+      }
+    }
+  }
+}
+query ListKleiderschranks(
+  $filter: ModelKleiderschrankFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listKleiderschranks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      bezeichnung
+      kleider {
+        nextToken
+      }
+      user {
+        id
+        name
+      }
+    }
+    nextToken
+  }
+}
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    id
+    name
+    freunde {
+      items {
+        id
+        name
+      }
+      nextToken
+    }
+  }
+}
+query ListUsers(
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      freunde {
+        nextToken
       }
     }
     nextToken
