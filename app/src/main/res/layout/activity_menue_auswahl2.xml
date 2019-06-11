@@ -18,12 +18,11 @@
         <TextView
             android:id="@+id/textView_header"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="59dp"
             android:layout_weight="1"
             android:text="Digital Wardrobe"
-            android:gravity="center_vertical"
             android:textColor="#000000"
-            android:textSize="30dp"
+            android:textSize="5dp"
             android:textStyle="bold"
             android:typeface="serif"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,8 +54,6 @@
             android:id="@+id/button_Home"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignStart="@+id/linearLayout"
-            android:layout_alignBottom="@+id/linearLayout"
             android:layout_weight="1"
             android:text="Home" />
 
@@ -71,9 +68,59 @@
             android:id="@+id/button_Menue"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignEnd="@+id/linearLayout"
             android:layout_weight="1"
-            android:text="Menü" />
+            android:text="Menü"
+            android:textColor="#D32F2F" />
     </LinearLayout>
 
+    <android.support.design.widget.NavigationView
+        android:layout_width="255dp"
+        android:layout_height="658dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_menueHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="left|center"
+                android:text="Home" />
+
+            <Button
+                android:id="@+id/button_menueAddClothes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left|center"
+                android:text="Kleider einfügen" />
+
+            <Button
+                android:id="@+id/button_menueShowClothes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="left|center"
+                android:text="Kleider anzeigen" />
+
+            <Button
+                android:id="@+id/button_menueOutfits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:gravity="left|center"
+                android:text="Outfits" />
+
+        </LinearLayout>
+    </android.support.design.widget.NavigationView>
 </RelativeLayout>
