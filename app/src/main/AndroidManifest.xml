@@ -30,6 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".addNewClothes"></activity>
+        <activity android:name=".capturePicture" />
+        <activity android:name=".MenueAuswahl2" />
+        <activity android:name=".chooseImage" />
+        <activity android:name=".MenueAuswahl" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
         <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
