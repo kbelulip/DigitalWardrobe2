@@ -98,7 +98,7 @@
     <ImageView
         android:id="@+id/imageView_ausgewähltesBild"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         android:layout_below="@id/frameLayout"/>
 
@@ -111,5 +111,39 @@
         android:textSize="18sp"
         android:text="Foto auswählen"
         android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/button_fotoAuswählen"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:id="@+id/editText_bezeichnung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Bezeichnung" />
+
+        <EditText
+            android:id="@+id/editText_kategorie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_marginTop="20dp"
+            android:text="Kategorie" />
+
+        <Button
+            android:id="@+id/button_hochladen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Hochladen"
+            android:background="#EE2C2C"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
 
 </RelativeLayout>
