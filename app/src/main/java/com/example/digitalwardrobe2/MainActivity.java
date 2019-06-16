@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
 import com.apollographql.apollo.GraphQLCall;
 import com.apollographql.apollo.api.Response;
@@ -22,6 +23,9 @@ import com.apollographql.apollo.exception.ApolloException;
 import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
+
+import type.ModelKleidungFilterInput;
+import type.ModelStringFilterInput;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     2);
         }
 
-        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(new).userID().build())
+        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(ModelKleidungFilterInput.builder().user(ModelStringFilterInput.builder().eq(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
                 .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
                 .enqueue(queryCallback);
     }
