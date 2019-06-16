@@ -49,15 +49,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonMenue = (Button) findViewById(R.id.button_Menue);
         buttonMenue.setOnClickListener(this);
 
+        Button buttonSettings = (Button) findViewById(R.id.button_Settings);
+        buttonSettings.setOnClickListener(this);
+
         ClientFactory.init(this);
     }
 
-
     @Override
     public void onClick(View view) {
-        Intent intent_goToActivityMenue = new Intent(this, MenueAuswahl.class);
-        startActivity(intent_goToActivityMenue);
-        this.finish();
+        switch (view.getId()) {
+            case R.id.button_Menue:
+                Intent intent_goToActivityMenue = new Intent(this, MenueAuswahl.class);
+                startActivity(intent_goToActivityMenue);
+                this.finish();
+                break;
+            case R.id.button_Settings:
+                Intent intent_goToSettings = new Intent(this, settings.class);
+                startActivity(intent_goToSettings);
+                this.finish();
+                break;
+        }
     }
 
     @Override
@@ -79,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     2);
         }
 
-        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().build())
+        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(new).userID().build())
                 .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
                 .enqueue(queryCallback);
     }

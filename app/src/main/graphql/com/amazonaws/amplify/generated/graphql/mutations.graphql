@@ -4,19 +4,10 @@ mutation CreateBlog($input: CreateBlogInput!) {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation UpdateBlog($input: UpdateBlogInput!) {
@@ -24,19 +15,10 @@ mutation UpdateBlog($input: UpdateBlogInput!) {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation DeleteBlog($input: DeleteBlogInput!) {
@@ -44,19 +26,10 @@ mutation DeleteBlog($input: DeleteBlogInput!) {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation CreatePost($input: CreatePostInput!) {
@@ -66,39 +39,20 @@ mutation CreatePost($input: CreatePostInput!) {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation UpdatePost($input: UpdatePostInput!) {
@@ -108,39 +62,20 @@ mutation UpdatePost($input: UpdatePostInput!) {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation DeletePost($input: DeletePostInput!) {
@@ -150,39 +85,20 @@ mutation DeletePost($input: DeletePostInput!) {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation CreateComment($input: CreateCommentInput!) {
@@ -192,29 +108,11 @@ mutation CreateComment($input: CreateCommentInput!) {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation UpdateComment($input: UpdateCommentInput!) {
@@ -224,29 +122,11 @@ mutation UpdateComment($input: UpdateCommentInput!) {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation DeleteComment($input: DeleteCommentInput!) {
@@ -256,29 +136,11 @@ mutation DeleteComment($input: DeleteCommentInput!) {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation CreateKleidung($input: CreateKleidungInput!) {
@@ -289,13 +151,8 @@ mutation CreateKleidung($input: CreateKleidungInput!) {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation UpdateKleidung($input: UpdateKleidungInput!) {
@@ -306,13 +163,8 @@ mutation UpdateKleidung($input: UpdateKleidungInput!) {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation DeleteKleidung($input: DeleteKleidungInput!) {
@@ -323,13 +175,8 @@ mutation DeleteKleidung($input: DeleteKleidungInput!) {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation CreateOutfit($input: CreateOutfitInput!) {
@@ -337,23 +184,10 @@ mutation CreateOutfit($input: CreateOutfitInput!) {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation UpdateOutfit($input: UpdateOutfitInput!) {
@@ -361,23 +195,10 @@ mutation UpdateOutfit($input: UpdateOutfitInput!) {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation DeleteOutfit($input: DeleteOutfitInput!) {
@@ -385,23 +206,10 @@ mutation DeleteOutfit($input: DeleteOutfitInput!) {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 mutation CreateKleiderschrank($input: CreateKleiderschrankInput!) {
@@ -409,23 +217,11 @@ mutation CreateKleiderschrank($input: CreateKleiderschrankInput!) {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
+    test
   }
 }
 mutation UpdateKleiderschrank($input: UpdateKleiderschrankInput!) {
@@ -433,23 +229,11 @@ mutation UpdateKleiderschrank($input: UpdateKleiderschrankInput!) {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
+    test
   }
 }
 mutation DeleteKleiderschrank($input: DeleteKleiderschrankInput!) {
@@ -457,61 +241,10 @@ mutation DeleteKleiderschrank($input: DeleteKleiderschrankInput!) {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
-  }
-}
-mutation CreateUser($input: CreateUserInput!) {
-  createUser(input: $input) {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-  }
-}
-mutation UpdateUser($input: UpdateUserInput!) {
-  updateUser(input: $input) {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-  }
-}
-mutation DeleteUser($input: DeleteUserInput!) {
-  deleteUser(input: $input) {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
+    user
+    userID
+    test
   }
 }

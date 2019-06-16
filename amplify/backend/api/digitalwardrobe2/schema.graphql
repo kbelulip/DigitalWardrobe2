@@ -2,7 +2,8 @@ type Blog @model {
   id: ID!
   name: String!
   posts: [Post] @connection(name: "BlogPosts")
-  user: User @connection
+  user: String
+  userID: String
 }
 type Post @model {
   id: ID!
@@ -10,13 +11,15 @@ type Post @model {
   blog: Blog @connection(name: "BlogPosts")
   outfit: Outfit @connection
   comments: [Comment] @connection(name: "PostComments")
-  user: User @connection
+  user: String
+  userID: String
 }
 type Comment @model {
   id: ID!
   content: String
   post: Post @connection(name: "PostComments")
-  user: User @connection
+  user: String
+  userID: String
 }
 type Kleidung @model {
   id: ID!
@@ -25,23 +28,23 @@ type Kleidung @model {
   farbe: String
   anlass: String
   foto: String
-  user: User @connection
+  user: String
+  userID: String
 }
 type Outfit @model {
   id: ID!
   anlass: String
   kleider: [Kleidung] @connection
-  user: User @connection
+  user: String
+  userID: String
 }
 type Kleiderschrank @model {
   id: ID!
   bezeichnung: String
   kleider: [Kleidung] @connection
-  user: User @connection
+  user: String
+  userID: String
+  test: String
 }
-type User @model {
-  id: ID!
-  name: String
-  freunde: [User] @connection
-}
+
 

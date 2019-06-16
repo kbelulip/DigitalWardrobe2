@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.amazonaws.amplify.generated.graphql.CreateKleidungMutation;
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
@@ -160,11 +161,15 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
             return CreateKleidungInput.builder()
                     .bezeichnung(bezeichnung)
                     .kategorie(kategorie)
+                    .user(AWSMobileClient.getInstance().getUsername())
+                    .userID(AWSMobileClient.getInstance().getIdentityId())
                     .foto(getS3Key(photoPath)).build();
         } else {
             return CreateKleidungInput.builder()
                     .bezeichnung(bezeichnung)
                     .kategorie(kategorie)
+                    .user(AWSMobileClient.getInstance().getUsername())
+                    .userID(AWSMobileClient.getInstance().getIdentityId())
                     .build();
         }
     }
@@ -205,8 +210,8 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(chooseImage.this, "Added pet", Toast.LENGTH_SHORT).show();
-                    chooseImage.this.finish();
+                    Toast.makeText(chooseImage.this, "Kleidung wurde hinzugefügt", Toast.LENGTH_SHORT).show();
+                    //chooseImage.this.finish();
                 }
             });
         }

@@ -4,19 +4,10 @@ query GetBlog($id: ID!) {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 query ListBlogs(
@@ -28,13 +19,8 @@ query ListBlogs(
     items {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     nextToken
   }
@@ -46,39 +32,20 @@ query GetPost($id: ID!) {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 query ListPosts(
@@ -90,21 +57,8 @@ query ListPosts(
     items {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     nextToken
   }
@@ -116,29 +70,11 @@ query GetComment($id: ID!) {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 query ListComments(
@@ -150,14 +86,8 @@ query ListComments(
     items {
       id
       content
-      post {
-        id
-        title
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     nextToken
   }
@@ -170,13 +100,8 @@ query GetKleidung($id: ID!) {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 query ListKleidungs(
@@ -192,10 +117,8 @@ query ListKleidungs(
       farbe
       anlass
       foto
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     nextToken
   }
@@ -205,23 +128,10 @@ query GetOutfit($id: ID!) {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 query ListOutfits(
@@ -233,13 +143,8 @@ query ListOutfits(
     items {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     nextToken
   }
@@ -249,23 +154,11 @@ query GetKleiderschrank($id: ID!) {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
+    test
   }
 }
 query ListKleiderschranks(
@@ -277,42 +170,9 @@ query ListKleiderschranks(
     items {
       id
       bezeichnung
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
-    }
-    nextToken
-  }
-}
-query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-  }
-}
-query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      freunde {
-        nextToken
-      }
+      user
+      userID
+      test
     }
     nextToken
   }

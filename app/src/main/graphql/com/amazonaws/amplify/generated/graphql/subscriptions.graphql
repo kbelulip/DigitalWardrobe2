@@ -4,19 +4,10 @@ subscription OnCreateBlog {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnUpdateBlog {
@@ -24,19 +15,10 @@ subscription OnUpdateBlog {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnDeleteBlog {
@@ -44,19 +26,10 @@ subscription OnDeleteBlog {
     id
     name
     posts {
-      items {
-        id
-        title
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnCreatePost {
@@ -66,39 +39,20 @@ subscription OnCreatePost {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnUpdatePost {
@@ -108,39 +62,20 @@ subscription OnUpdatePost {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnDeletePost {
@@ -150,39 +85,20 @@ subscription OnDeletePost {
     blog {
       id
       name
-      posts {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     outfit {
       id
       anlass
-      kleider {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
     comments {
-      items {
-        id
-        content
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnCreateComment {
@@ -192,29 +108,11 @@ subscription OnCreateComment {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnUpdateComment {
@@ -224,29 +122,11 @@ subscription OnUpdateComment {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnDeleteComment {
@@ -256,29 +136,11 @@ subscription OnDeleteComment {
     post {
       id
       title
-      blog {
-        id
-        name
-      }
-      outfit {
-        id
-        anlass
-      }
-      comments {
-        nextToken
-      }
-      user {
-        id
-        name
-      }
+      user
+      userID
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnCreateKleidung {
@@ -289,13 +151,8 @@ subscription OnCreateKleidung {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnUpdateKleidung {
@@ -306,13 +163,8 @@ subscription OnUpdateKleidung {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnDeleteKleidung {
@@ -323,13 +175,8 @@ subscription OnDeleteKleidung {
     farbe
     anlass
     foto
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnCreateOutfit {
@@ -337,23 +184,10 @@ subscription OnCreateOutfit {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnUpdateOutfit {
@@ -361,23 +195,10 @@ subscription OnUpdateOutfit {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnDeleteOutfit {
@@ -385,23 +206,10 @@ subscription OnDeleteOutfit {
     id
     anlass
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
   }
 }
 subscription OnCreateKleiderschrank {
@@ -409,23 +217,11 @@ subscription OnCreateKleiderschrank {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
+    test
   }
 }
 subscription OnUpdateKleiderschrank {
@@ -433,23 +229,11 @@ subscription OnUpdateKleiderschrank {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
+    user
+    userID
+    test
   }
 }
 subscription OnDeleteKleiderschrank {
@@ -457,61 +241,10 @@ subscription OnDeleteKleiderschrank {
     id
     bezeichnung
     kleider {
-      items {
-        id
-        bezeichnung
-        kategorie
-        farbe
-        anlass
-        foto
-      }
       nextToken
     }
-    user {
-      id
-      name
-      freunde {
-        nextToken
-      }
-    }
-  }
-}
-subscription OnCreateUser {
-  onCreateUser {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-  }
-}
-subscription OnUpdateUser {
-  onUpdateUser {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
-  }
-}
-subscription OnDeleteUser {
-  onDeleteUser {
-    id
-    name
-    freunde {
-      items {
-        id
-        name
-      }
-      nextToken
-    }
+    user
+    userID
+    test
   }
 }

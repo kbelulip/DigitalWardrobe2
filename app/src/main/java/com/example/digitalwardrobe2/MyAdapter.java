@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private List<ListKleidungsQuery.Item> mData = new ArrayList<>();;
+    private List<ListKleidungsQuery.Item> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private static final String TAG = "MyAdapter";
 
