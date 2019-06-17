@@ -23,6 +23,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private List<ListKleidungsQuery.Item> mData = new ArrayList<>();
+    private OnItemClickListener mListener;
     private LayoutInflater mInflater;
     private static final String TAG = "MyAdapter";
 
@@ -36,7 +37,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mListener);
     }
 
     // binds the data to the TextView in each row
@@ -61,14 +62,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView txt_bezeichnung;
         ImageView image_view;
         String localUrl;
-        public ImageView likeImage;
 
-        ViewHolder(View itemView) {
+        ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             txt_bezeichnung = itemView.findViewById(R.id.editText_userName);
             image_view = itemView.findViewById(R.id.image_view);
-            likeImage = itemView.findViewById(R.id.button_Like);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
 
         void bindData(ListKleidungsQuery.Item item) {
@@ -121,5 +131,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
     }
 }

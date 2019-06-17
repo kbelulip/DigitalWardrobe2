@@ -60,6 +60,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonHome = findViewById(R.id.button_Home);
         buttonHome.setOnClickListener(this);
 
+        mAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Log.d(TAG, "VEGETA ist stärker als GOKU      at       " + position);
+            }
+        });
+
         ClientFactory.init(this);
     }
 
