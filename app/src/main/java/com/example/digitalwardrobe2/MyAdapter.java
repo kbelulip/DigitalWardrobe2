@@ -62,13 +62,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView txt_bezeichnung;
         ImageView image_view;
         String localUrl;
+        public ImageView imvLike;
 
         ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            txt_bezeichnung = itemView.findViewById(R.id.editText_userName);
+            txt_bezeichnung = itemView.findViewById(R.id.textView_userName);
             image_view = itemView.findViewById(R.id.image_view);
+            imvLike = itemView.findViewById(R.id.clickableImv_Like);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            imvLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(listener != null) {
