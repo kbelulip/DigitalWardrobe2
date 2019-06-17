@@ -64,9 +64,9 @@
             android:id="@+id/button_Save"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginStart="150dp"
             android:background="#FFFFFF"
-            android:layout_marginLeft="150dp"
-            android:src="@drawable/ic_bookmark_border_black_24dp"/>
+            android:src="@drawable/ic_bookmark_border_black_24dp" />
     </LinearLayout>
 
 </LinearLayout>

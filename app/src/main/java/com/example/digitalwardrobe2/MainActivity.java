@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Log.d(TAG, "VEGETA ist stärker als GOKU      at       " + position);
+                Toast.makeText(getApplicationContext(), "Like izzz daa für: "+mKleidungs.get(position).id(),
+                        Toast.LENGTH_LONG).show();
             }
         });
 
