@@ -61,11 +61,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView txt_bezeichnung;
         ImageView image_view;
         String localUrl;
+        public ImageView likeImage;
 
         ViewHolder(View itemView) {
             super(itemView);
             txt_bezeichnung = itemView.findViewById(R.id.editText_userName);
             image_view = itemView.findViewById(R.id.image_view);
+            likeImage = itemView.findViewById(R.id.button_Like);
+
         }
 
         void bindData(ListKleidungsQuery.Item item) {
@@ -119,6 +122,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             });
         }
     }
-
-
 }

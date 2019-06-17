@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
@@ -30,7 +29,7 @@ import type.ModelKleidungFilterInput;
 import type.ModelStringFilterInput;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView mRecyclerView;
     MyAdapter mAdapter;
