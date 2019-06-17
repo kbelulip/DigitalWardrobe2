@@ -111,15 +111,15 @@
                 android:textColor="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editText_bezeichnung"
+                android:id="@+id/editText_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:layout_marginTop="20dp"
                 android:hint="Bezeichnung"
-                android:nextFocusUp="@id/editText_bezeichnung"
-                android:nextFocusLeft="@id/editText_bezeichnung"/>
+                android:nextFocusUp="@id/editText_userName"
+                android:nextFocusLeft="@id/editText_userName"/>
 
             <Spinner
                 android:id="@+id/spinner_kategorie"

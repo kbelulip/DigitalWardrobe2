@@ -59,20 +59,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // stores and recycles views as they are scrolled off screen
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_bezeichnung;
-        TextView txt_kategorie;
         ImageView image_view;
         String localUrl;
 
         ViewHolder(View itemView) {
             super(itemView);
-            txt_bezeichnung = itemView.findViewById(R.id.editText_bezeichnung);
-            txt_kategorie = itemView.findViewById(R.id.editText_kategorie);
+            txt_bezeichnung = itemView.findViewById(R.id.editText_userName);
             image_view = itemView.findViewById(R.id.image_view);
         }
 
         void bindData(ListKleidungsQuery.Item item) {
             txt_bezeichnung.setText(item.user());
-            txt_kategorie.setText(item.kategorie());
 
             if (item.foto() != null) {
                 if (localUrl == null) {

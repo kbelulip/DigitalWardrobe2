@@ -178,7 +178,7 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
     }
 
     private CreateKleidungInput getCreateKleidungInput() {
-        final String bezeichnung = ((EditText) findViewById(R.id.editText_bezeichnung)).getText().toString();
+        final String bezeichnung = ((EditText) findViewById(R.id.editText_userName)).getText().toString();
         final String kategorie = ((EditText) findViewById(R.id.editText_kategorie)).getText().toString();
 
         if (photoPath != null && !photoPath.isEmpty()){

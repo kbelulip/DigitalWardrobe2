@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button buttonSettings = (Button) findViewById(R.id.button_Settings);
         buttonSettings.setOnClickListener(this);
 
+        Button buttonHome = findViewById(R.id.button_Home);
+        buttonHome.setOnClickListener(this);
+
         ClientFactory.init(this);
     }
 
@@ -71,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent_goToSettings = new Intent(this, settings.class);
                 startActivity(intent_goToSettings);
                 this.finish();
+                break;
+            case R.id.button_Home:
+                Toast.makeText(getApplicationContext(), "Keine Funktion hinterlegt", Toast.LENGTH_LONG).show();
                 break;
         }
     }

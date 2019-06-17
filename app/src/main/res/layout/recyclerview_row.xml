@@ -17,17 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
-            android:textSize="15dp"
-            android:id="@+id/editText_bezeichnung"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:textSize="15dp"
-            android:id="@+id/editText_kategorie"
-            />
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:id="@+id/editText_userName"/>
     </LinearLayout>
 
     <ImageView
@@ -35,5 +28,46 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:maxHeight="200dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp">
+
+
+        <Button
+            android:id="@+id/button_Like"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#FFFFFF"
+            android:layout_marginStart="10dp"
+            android:drawableTop="@drawable/ic_favorite_border_black_24dp"/>
+
+        <Button
+            android:id="@+id/button_Comment"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="30dp"
+            android:drawableTop="@drawable/ic_chat_bubble_outline_black_24dp"
+            android:background="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/button_Share"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="30dp"
+            android:drawableTop="@drawable/ic_share_black_24dp"
+            android:background="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/button_Save"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="#FFFFFF"
+            android:layout_marginLeft="180dp"
+            android:drawableTop="@drawable/ic_bookmark_border_black_24dp"/>
+    </LinearLayout>
 
 </LinearLayout>
