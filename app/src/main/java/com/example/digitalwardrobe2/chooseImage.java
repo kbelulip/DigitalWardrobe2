@@ -37,13 +37,15 @@ import javax.annotation.Nonnull;
 
 import type.CreateKleidungInput;
 
-public class chooseImage extends AppCompatActivity implements View.OnClickListener{
+public class chooseImage extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener{
 
     Button button_fotoAuswählen;
     ImageView imageView_ausgewähltesBild;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
     Spinner spinner_Variant;
+    Spinner spinner_Anlass;
+    Spinner spinner_Farbe;
     private String photoPath;
     private static final String TAG = "chooseImage";
 
@@ -60,33 +62,20 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
         Button button_abbrechen = (Button)findViewById(R.id.button_abbrechen);
         button_abbrechen.setOnClickListener(this);
 
-        Button button_weiter = (Button)findViewById(R.id.button_weiter);
-        button_weiter.setOnClickListener(this);
-
         Button button_hochladen = findViewById(R.id.button_hochladen);
         button_hochladen.setOnClickListener(this);
 
         spinner_Variant = findViewById(R.id.spinner_Variant);
         prepareSpinner();
-        spinner_Variant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Galerie")) {
-                    // do nothing
-                }
-                else {
-                    if(parent.getItemAtPosition(position).equals("Foto")) {
-                        Intent gotToActivity_captureFoto = new Intent(chooseImage.this, capturePicture.class);
-                        startActivity(gotToActivity_captureFoto);
-                    }
-                }
-            }
+        spinner_Variant.setOnItemSelectedListener(this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
-            }
-        });
+        spinner_Anlass = findViewById(R.id.spinner_anlass);
+        prepareSpinnerClothes(spinner_Anlass, R.array.spinner_anlass);
+        spinner_Anlass.setOnItemSelectedListener(this);
+
+        spinner_Farbe = findViewById(R.id.spinner_farbe);
+        prepareSpinnerClothes(spinner_Farbe, R.array.spinner_farbe);
+        spinner_Farbe.setOnItemSelectedListener(this);
     }
 
 
@@ -101,15 +90,40 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
                 startActivity(intent_goToActivityMenue);
                 this.finish();
                 break;
-            case R.id.button_weiter:
-                Intent intent_gotToActivityAddNewClothes = new Intent(this, addNewClothes.class);
-                intent_gotToActivityAddNewClothes.putExtra("resId", R.id.imageView_ausgewähltesBild);
-                startActivity(intent_gotToActivityAddNewClothes);
-                break;
             case R.id.button_hochladen:
                 uploadAndSave();
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_Variant:
+                if (parent.getItemAtPosition(position).equals("GALERIE")) {
+                    // do nothing
+                } else {
+                    if (parent.getItemAtPosition(position).equals("FOTO")) {
+                        Intent gotToActivity_captureFoto = new Intent(chooseImage.this, capturePicture.class);
+                        startActivity(gotToActivity_captureFoto);
+                    }
+                }
+                break;
+            case R.id.spinner_anlass:
+                if (position == 1) {
+                    Toast.makeText(getApplicationContext(), "Anlass", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.spinner_farbe:
+                if (position == 1) {
+                    Toast.makeText(getApplicationContext(), "Farbe", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO Auto-generated method stub
     }
 
     private void openGallery() {
@@ -142,15 +156,25 @@ public class chooseImage extends AppCompatActivity implements View.OnClickListen
 
     private void prepareSpinner() {
         List<String> variants = new ArrayList<>();
-        variants.add(0, "Galerie");
-        variants.add("Foto");
+        variants.add(0, "GALERIE");
+        variants.add("FOTO");
         // Style and populate the spinner
         ArrayAdapter<String> dataAdapter;
-        dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, variants);
+        dataAdapter = new ArrayAdapter(this, R.layout.spinner_layout, variants);
         // Dropwdown layout style
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinner_Variant.setAdapter(dataAdapter);
+    }
+
+    private void prepareSpinnerClothes(Spinner spinner, int array) {
+        // Style and populate the spinner
+        ArrayAdapter dataAdapter;
+        dataAdapter = ArrayAdapter.createFromResource(this, array, R.layout.spinner_clothes_layout);
+        // Dropwdown layout style
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
     }
 
     private CreateKleidungInput getCreateKleidungInput() {

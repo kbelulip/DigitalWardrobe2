@@ -16,9 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class capturePicture extends AppCompatActivity implements View.OnClickListener{
+public class capturePicture extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener{
     ImageView imageView_ausgewähltesBild;
     Spinner spinner_Variant;
+    Spinner spinner_Kategorie;
+    Spinner spinner_Anlass;
+    Spinner spinner_Farbe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,38 +37,42 @@ public class capturePicture extends AppCompatActivity implements View.OnClickLis
 
         spinner_Variant = findViewById(R.id.spinner_Variant);
         prepareSpinner();
-        spinner_Variant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Foto")) {
-                    // do nothing
-                }
-                else {
-                    if(parent.getItemAtPosition(position).equals("Galerie")) {
-                        Intent gotToActivity_chooseImage = new Intent(capturePicture.this, chooseImage.class);
-                        startActivity(gotToActivity_chooseImage);
-                    }
-                }
-            }
+        spinner_Variant.setOnItemSelectedListener(this);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
-            }
-        });
+        spinner_Kategorie = findViewById(R.id.spinner_kategorie);
+        prepareSpinnerClothes(spinner_Kategorie, R.array.spinner_kategorie);
+        spinner_Kategorie.setOnItemSelectedListener(this);
+
+        spinner_Anlass = findViewById(R.id.spinner_anlass);
+        prepareSpinnerClothes(spinner_Anlass, R.array.spinner_anlass);
+        spinner_Anlass.setOnItemSelectedListener(this);
+
+        spinner_Farbe = findViewById(R.id.spinner_farbe);
+        prepareSpinnerClothes(spinner_Farbe, R.array.spinner_farbe);
+        spinner_Farbe.setOnItemSelectedListener(this);
     }
 
     private void prepareSpinner() {
         List<String> variants = new ArrayList<>();
-        variants.add(0, "Foto");
-        variants.add("Galerie");
+        variants.add(0, "FOTO");
+        variants.add("GALERIE");
         // Style and populate the spinner
         ArrayAdapter<String> dataAdapter;
-        dataAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, variants);
+        dataAdapter = new ArrayAdapter(this, R.layout.spinner_layout, variants);
         // Dropwdown layout style
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinner_Variant.setAdapter(dataAdapter);
+    }
+
+    private void prepareSpinnerClothes(Spinner spinner, int array) {
+        // Style and populate the spinner
+        ArrayAdapter dataAdapter;
+        dataAdapter = ArrayAdapter.createFromResource(this, array, R.layout.spinner_clothes_layout);
+        // Dropwdown layout style
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
     }
 
     @Override
@@ -80,6 +87,41 @@ public class capturePicture extends AppCompatActivity implements View.OnClickLis
                 this.finish();
                 break;
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spinner_Variant:
+                if (parent.getItemAtPosition(position).equals("GALERIE")) {
+                    // do nothing
+                } else {
+                    if (parent.getItemAtPosition(position).equals("FOTO")) {
+                        Intent gotToActivity_captureFoto = new Intent(this, capturePicture.class);
+                        startActivity(gotToActivity_captureFoto);
+                    }
+                }
+                break;
+            case R.id.spinner_kategorie:
+                if (position == 1) {
+                    Toast.makeText(getApplicationContext(), "Kategorie", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.spinner_anlass:
+                if (position == 1) {
+                    Toast.makeText(getApplicationContext(), "Anlass", Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.spinner_farbe:
+                if (position == 1) {
+                    Toast.makeText(getApplicationContext(), "Farbe", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // TODO Auto-generated method stub
     }
 
     private void openCamera() {

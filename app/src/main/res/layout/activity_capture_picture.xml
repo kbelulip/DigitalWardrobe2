@@ -55,12 +55,12 @@
             android:layout_weight="1"
             android:background="#FFFFFF" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button_weiter"
+                android:id="@+id/button_abbrechen"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
                 android:layout_alignParentTop="true"
@@ -68,48 +68,115 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:background="#FFFFFF"
-                android:text="Weiter"
+                android:text="Zurück"
                 android:textColor="#4876FF"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/spinner_Variant"
                 android:layout_width="100dp"
                 android:layout_height="55dp"
-                android:layout_alignParentTop="true"
-                android:textSize="14dp"
-                android:textColor="#FFFFFF"
-                android:layout_toStartOf="@+id/button_weiter"
-                android:layout_toEndOf="@+id/button_abbrechen" />
-
-            <Button
-                android:id="@+id/button_abbrechen"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
                 android:layout_marginStart="0dp"
                 android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:text="X"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:layout_toEndOf="@+id/button_abbrechen" />
+        </LinearLayout>
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/imageView_ausgewähltesBild"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:layout_below="@id/frameLayout"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@id/frameLayout"
+        android:layout_centerHorizontal="true">
 
-    <Button
-        android:id="@+id/button_fotoAufnehmen"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:layout_below="@+id/imageView_ausgewähltesBild"
-        android:background="#EE2C2C"
-        android:textSize="18sp"
-        android:text="Foto aufnehmen"
-        android:textColor="#FFFFFF" />
+        <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView_ausgewähltesBild"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"/>
+
+            <Button
+                android:id="@+id/button_fotoAufnehmen"
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:background="#EE2C2C"
+                android:textSize="18sp"
+                android:text="Foto aufnehmen"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/editText_bezeichnung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:layout_marginTop="20dp"
+                android:hint="Bezeichnung"
+                android:nextFocusUp="@id/editText_bezeichnung"
+                android:nextFocusLeft="@id/editText_bezeichnung"/>
+
+            <Spinner
+                android:id="@+id/spinner_kategorie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:entries="@array/spinner_kategorie"/>
+
+            <View
+                android:id="@+id/divider_spinnerKategorie"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="#000000"/>
+
+            <Spinner
+                android:id="@+id/spinner_anlass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:entries="@array/spinner_anlass"/>
+
+            <View
+                android:id="@+id/divider_spinnerAnlass"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="#000000"/>
+
+            <Spinner
+                android:id="@+id/spinner_farbe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:entries="@array/spinner_farbe"/>
+
+            <View
+                android:id="@+id/divider_spinnerFarbe"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:background="#000000"/>
+
+            <Button
+                android:id="@+id/button_hochladen"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="#EE2C2C"
+                android:text="Hochladen"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical|center_horizontal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

@@ -1,4 +1,34 @@
 <resources>
     <string name="app_name">DigitalWardrobe2</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="spinner_kategorie">
+        <item>Kategorie</item>
+        <item>Kopfbedeckung</item>
+        <item>Jacke</item>
+        <item>Pullover</item>
+        <item>T-shirt</item>
+        <item>Hemd</item>
+        <item>Polohemd</item>
+        <item>Accessoires/Schmuck</item>
+        <item>Hose</item>
+        <item>Schuhe</item>
+    </string-array>
+
+    <string-array name="spinner_anlass">
+        <item>Anlass</item>
+        <item>Casual</item>
+        <item>Business</item>
+        <item>Sport</item>
+    </string-array>
+
+    <string-array name="spinner_farbe">
+        <item>Farbe</item>
+        <item>weiss</item>
+        <item>schwarz</item>
+        <item>blau</item>
+        <item>rot</item>
+        <item>gelb</item>
+        <item>grün</item>
+    </string-array>
 </resources>

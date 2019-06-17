@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addNewClothes" />
         <activity android:name=".capturePicture" />
         <activity android:name=".MenueAuswahl2" />
         <activity android:name=".chooseImage" />
