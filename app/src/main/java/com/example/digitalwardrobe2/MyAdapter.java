@@ -71,7 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         void bindData(ListKleidungsQuery.Item item) {
-            txt_bezeichnung.setText(item.bezeichnung());
+            txt_bezeichnung.setText(item.user());
             txt_kategorie.setText(item.kategorie());
 
             if (item.foto() != null) {

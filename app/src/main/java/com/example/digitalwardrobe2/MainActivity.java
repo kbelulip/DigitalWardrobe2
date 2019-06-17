@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     2);
         }
 
-        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(ModelKleidungFilterInput.builder().user(ModelStringFilterInput.builder().eq(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
+        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(ModelKleidungFilterInput.builder().user(ModelStringFilterInput.builder().ne(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
                 .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
                 .enqueue(queryCallback);
     }
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onResponse(@Nonnull Response<ListKleidungsQuery.Data> response) {
 
             mKleidungs = new ArrayList<>(response.data().listKleidungs().items());
-
             Log.i(TAG, "Retrieved list items: " + mKleidungs.toString());
 
             runOnUiThread(new Runnable() {
