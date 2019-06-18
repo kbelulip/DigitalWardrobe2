@@ -1,32 +1,41 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateBlog($input: CreateBlogInput!) {
-  createBlog(input: $input) {
+mutation CreateHerz($input: CreateHerzInput!) {
+  createHerz(input: $input) {
     id
-    name
-    posts {
-      nextToken
+    post {
+      id
+      title
+      likeCount
+      user
+      userID
     }
     user
     userID
   }
 }
-mutation UpdateBlog($input: UpdateBlogInput!) {
-  updateBlog(input: $input) {
+mutation UpdateHerz($input: UpdateHerzInput!) {
+  updateHerz(input: $input) {
     id
-    name
-    posts {
-      nextToken
+    post {
+      id
+      title
+      likeCount
+      user
+      userID
     }
     user
     userID
   }
 }
-mutation DeleteBlog($input: DeleteBlogInput!) {
-  deleteBlog(input: $input) {
+mutation DeleteHerz($input: DeleteHerzInput!) {
+  deleteHerz(input: $input) {
     id
-    name
-    posts {
-      nextToken
+    post {
+      id
+      title
+      likeCount
+      user
+      userID
     }
     user
     userID
@@ -36,12 +45,6 @@ mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
     id
     title
-    blog {
-      id
-      name
-      user
-      userID
-    }
     outfit {
       id
       anlass
@@ -51,6 +54,7 @@ mutation CreatePost($input: CreatePostInput!) {
     comments {
       nextToken
     }
+    likeCount
     user
     userID
   }
@@ -59,12 +63,6 @@ mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
     id
     title
-    blog {
-      id
-      name
-      user
-      userID
-    }
     outfit {
       id
       anlass
@@ -74,6 +72,7 @@ mutation UpdatePost($input: UpdatePostInput!) {
     comments {
       nextToken
     }
+    likeCount
     user
     userID
   }
@@ -82,12 +81,6 @@ mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
     id
     title
-    blog {
-      id
-      name
-      user
-      userID
-    }
     outfit {
       id
       anlass
@@ -97,6 +90,7 @@ mutation DeletePost($input: DeletePostInput!) {
     comments {
       nextToken
     }
+    likeCount
     user
     userID
   }
@@ -108,6 +102,7 @@ mutation CreateComment($input: CreateCommentInput!) {
     post {
       id
       title
+      likeCount
       user
       userID
     }
@@ -122,6 +117,7 @@ mutation UpdateComment($input: UpdateCommentInput!) {
     post {
       id
       title
+      likeCount
       user
       userID
     }
@@ -136,6 +132,7 @@ mutation DeleteComment($input: DeleteCommentInput!) {
     post {
       id
       title
+      likeCount
       user
       userID
     }
@@ -210,41 +207,5 @@ mutation DeleteOutfit($input: DeleteOutfitInput!) {
     }
     user
     userID
-  }
-}
-mutation CreateKleiderschrank($input: CreateKleiderschrankInput!) {
-  createKleiderschrank(input: $input) {
-    id
-    bezeichnung
-    kleider {
-      nextToken
-    }
-    user
-    userID
-    test
-  }
-}
-mutation UpdateKleiderschrank($input: UpdateKleiderschrankInput!) {
-  updateKleiderschrank(input: $input) {
-    id
-    bezeichnung
-    kleider {
-      nextToken
-    }
-    user
-    userID
-    test
-  }
-}
-mutation DeleteKleiderschrank($input: DeleteKleiderschrankInput!) {
-  deleteKleiderschrank(input: $input) {
-    id
-    bezeichnung
-    kleider {
-      nextToken
-    }
-    user
-    userID
-    test
   }
 }

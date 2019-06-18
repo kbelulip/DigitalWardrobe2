@@ -1,16 +1,15 @@
-type Blog @model {
+type Herz @model {
   id: ID!
-  name: String!
-  posts: [Post] @connection(name: "BlogPosts")
+  post: Post @connection
   user: String
   userID: String
 }
 type Post @model {
   id: ID!
-  title: String!
-  blog: Blog @connection(name: "BlogPosts")
+  title: String
   outfit: Outfit @connection
   comments: [Comment] @connection(name: "PostComments")
+  likeCount: Int
   user: String
   userID: String
 }
@@ -38,13 +37,6 @@ type Outfit @model {
   user: String
   userID: String
 }
-type Kleiderschrank @model {
-  id: ID!
-  bezeichnung: String
-  kleider: [Kleidung] @connection
-  user: String
-  userID: String
-  test: String
-}
+
 
 

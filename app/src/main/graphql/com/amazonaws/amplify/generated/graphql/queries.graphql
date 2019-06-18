@@ -1,24 +1,26 @@
 # this is an auto generated file. This will be overwritten
-query GetBlog($id: ID!) {
-  getBlog(id: $id) {
+query GetHerz($id: ID!) {
+  getHerz(id: $id) {
     id
-    name
-    posts {
-      nextToken
+    post {
+      id
+      title
+      likeCount
+      user
+      userID
     }
     user
     userID
   }
 }
-query ListBlogs(
-  $filter: ModelBlogFilterInput
+query ListHerzs(
+  $filter: ModelHerzFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listHerzs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      name
       user
       userID
     }
@@ -29,12 +31,6 @@ query GetPost($id: ID!) {
   getPost(id: $id) {
     id
     title
-    blog {
-      id
-      name
-      user
-      userID
-    }
     outfit {
       id
       anlass
@@ -44,6 +40,7 @@ query GetPost($id: ID!) {
     comments {
       nextToken
     }
+    likeCount
     user
     userID
   }
@@ -57,6 +54,7 @@ query ListPosts(
     items {
       id
       title
+      likeCount
       user
       userID
     }
@@ -70,6 +68,7 @@ query GetComment($id: ID!) {
     post {
       id
       title
+      likeCount
       user
       userID
     }
@@ -145,34 +144,6 @@ query ListOutfits(
       anlass
       user
       userID
-    }
-    nextToken
-  }
-}
-query GetKleiderschrank($id: ID!) {
-  getKleiderschrank(id: $id) {
-    id
-    bezeichnung
-    kleider {
-      nextToken
-    }
-    user
-    userID
-    test
-  }
-}
-query ListKleiderschranks(
-  $filter: ModelKleiderschrankFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listKleiderschranks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      bezeichnung
-      user
-      userID
-      test
     }
     nextToken
   }
