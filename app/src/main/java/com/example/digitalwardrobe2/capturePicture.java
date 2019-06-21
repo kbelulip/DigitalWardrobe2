@@ -93,11 +93,11 @@ public class capturePicture extends AppCompatActivity implements View.OnClickLis
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (parent.getId()) {
             case R.id.spinner_Variant:
-                if (parent.getItemAtPosition(position).equals("GALERIE")) {
+                if (parent.getItemAtPosition(position).equals("FOTO")) {
                     // do nothing
                 } else {
-                    if (parent.getItemAtPosition(position).equals("FOTO")) {
-                        Intent gotToActivity_captureFoto = new Intent(this, capturePicture.class);
+                    if (parent.getItemAtPosition(position).equals("GALERIE")) {
+                        Intent gotToActivity_captureFoto = new Intent(this, chooseImage.class);
                         startActivity(gotToActivity_captureFoto);
                     }
                 }

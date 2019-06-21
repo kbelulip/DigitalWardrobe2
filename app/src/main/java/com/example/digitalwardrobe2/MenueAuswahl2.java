@@ -21,6 +21,9 @@ public class MenueAuswahl2 extends AppCompatActivity implements View.OnClickList
 
         Button button_menueAddClothes = (Button) findViewById(R.id.button_menueAddClothes);
         button_menueAddClothes.setOnClickListener(this);
+
+        Button button_OutfitsErstellen = (Button) findViewById(R.id.button_menueOutfits);
+        button_OutfitsErstellen.setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +42,11 @@ public class MenueAuswahl2 extends AppCompatActivity implements View.OnClickList
             case R.id.button_menueAddClothes:
                 Intent intent_goToActivityChooseImage = new Intent(this, chooseImage.class);
                 startActivity(intent_goToActivityChooseImage);
+                this.finish();
+                break;
+            case R.id.button_menueOutfits:
+                Intent intent_goToActivityOutfits = new Intent(this, createOutfit.class);
+                startActivity(intent_goToActivityOutfits);
                 this.finish();
                 break;
         }

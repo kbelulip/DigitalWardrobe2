@@ -1,19 +1,17 @@
 package com.example.digitalwardrobe2;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-public class MenueAuswahl extends AppCompatActivity implements View.OnClickListener{
+public class MenueAuswahl3 extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menue_auswahl);
+        setContentView(R.layout.activity_menue_auswahl3);
 
         Button buttonMenue = (Button) findViewById(R.id.button_Menue);
         buttonMenue.setOnClickListener(this);
@@ -47,10 +45,10 @@ public class MenueAuswahl extends AppCompatActivity implements View.OnClickListe
                 this.finish();
                 break;
             case R.id.button_menueOutfits:
-                 Intent intent_goToActivityOutfits = new Intent(this, createOutfit.class);
-                 startActivity(intent_goToActivityOutfits);
-                 this.finish();
-                 break;
+                Intent intent_goToActivityOutfits = new Intent(this, createOutfit.class);
+                startActivity(intent_goToActivityOutfits);
+                this.finish();
+                break;
         }
     }
 }
