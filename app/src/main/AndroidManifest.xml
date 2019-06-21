@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".showOutfit"></activity>
+        <activity android:name=".showClothes"></activity>
+        <activity android:name=".showOutfit" />
         <activity android:name=".MenueAuswahl3" />
         <activity android:name=".createOutfit" />
         <activity android:name=".selectClothes" />

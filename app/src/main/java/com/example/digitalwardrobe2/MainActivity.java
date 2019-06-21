@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import type.ModelStringFilterInput;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView mRecyclerView;
     MyAdapter mAdapter;
 
