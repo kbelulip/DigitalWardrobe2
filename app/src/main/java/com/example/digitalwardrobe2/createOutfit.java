@@ -25,6 +25,7 @@ import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -33,6 +34,7 @@ import type.ModelKleidungFilterInput;
 import type.ModelStringFilterInput;
 
 public class createOutfit extends AppCompatActivity implements View.OnClickListener {
+    private ArrayList<String> slideImages = new ArrayList<>();
     RecyclerView mRecyclerView;
     private ArrayList<ListKleidungsQuery.Item> mKleidungs;
     CreateOutfitsAdapter mAdapter;
@@ -53,6 +55,13 @@ public class createOutfit extends AppCompatActivity implements View.OnClickListe
 
         Button button_abbrechen = (Button)findViewById(R.id.button_abbrechen);
         button_abbrechen.setOnClickListener(this);
+
+        mAdapter.setOnItemClickListener(new CreateOutfitsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                fillArrayListSliderImages(mKleidungs.get(position).id());
+            }
+        });
     }
 
     @Override
@@ -115,6 +124,27 @@ public class createOutfit extends AppCompatActivity implements View.OnClickListe
             Log.e(TAG, e.toString());
         }
     };
+
+
+    /*
+    Methode zum Hinzufügen der ausgewählten Bilder in eine ArrayList
+     */
+    private void fillArrayListSliderImages(String imageID) {
+        if(slideImages.contains(imageID)) {
+            slideImages.remove(imageID);
+            Toast.makeText(getApplicationContext(), imageID+" wurde der aus der Liste entfernt"+
+                            System.getProperty("line.sperator") + System.getProperty("line.sperator") +
+                            Arrays.deepToString(slideImages.toArray()),
+                    Toast.LENGTH_LONG).show();
+        }
+        else {
+            slideImages.add(imageID);
+            Toast.makeText(getApplicationContext(), imageID+" wurde der Liste hinzugefügt"+
+                            System.getProperty("line.sperator") + System.getProperty("line.sperator")+
+                            Arrays.deepToString(slideImages.toArray()),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
 
 
 }
