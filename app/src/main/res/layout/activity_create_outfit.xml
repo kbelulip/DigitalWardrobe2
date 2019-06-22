@@ -65,19 +65,24 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:background="#FFFFFF"
                 android:text="Zurück"
                 android:textColor="#4876FF"
                 android:textSize="16sp" />
 
-            <Spinner
-                android:id="@+id/spinner_Variant"
-                android:layout_width="100dp"
+            <Button
+                android:id="@+id/button_ErstelleOutfit"
+                android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:layout_marginStart="0dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
                 android:layout_weight="1"
-                android:layout_toEndOf="@+id/button_abbrechen" />
+                android:background="#FFFFFF"
+                android:text="Erstelle Outfit"
+                android:textColor="#4876FF"
+                android:textSize="16sp" />
         </LinearLayout>
     </FrameLayout>
 

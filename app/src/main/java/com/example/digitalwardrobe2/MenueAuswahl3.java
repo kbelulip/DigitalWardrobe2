@@ -45,7 +45,7 @@ public class MenueAuswahl3 extends AppCompatActivity implements View.OnClickList
                 this.finish();
                 break;
             case R.id.button_menueOutfits:
-                Intent intent_goToActivityOutfits = new Intent(this, createOutfit.class);
+                Intent intent_goToActivityOutfits = new Intent(this, OutfitOption.class);
                 startActivity(intent_goToActivityOutfits);
                 this.finish();
                 break;

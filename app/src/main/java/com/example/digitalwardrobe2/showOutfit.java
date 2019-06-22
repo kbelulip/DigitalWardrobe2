@@ -33,7 +33,7 @@ public class showOutfit extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.button_abbrechen:
-                Intent intent_goToActivityMenue = new Intent(this, MenueAuswahl3.class);
+                Intent intent_goToActivityMenue = new Intent(this, OutfitOption.class);
                 startActivity(intent_goToActivityMenue);
                 this.finish();
                 break;
