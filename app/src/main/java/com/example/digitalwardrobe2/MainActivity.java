@@ -32,7 +32,6 @@ import type.ModelStringFilterInput;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView mRecyclerView;
     MyAdapter mAdapter;
 
