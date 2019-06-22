@@ -56,6 +56,9 @@ public class createOutfit extends AppCompatActivity implements View.OnClickListe
         Button button_abbrechen = (Button)findViewById(R.id.button_abbrechen);
         button_abbrechen.setOnClickListener(this);
 
+        Button button_weiter = findViewById(R.id.button_ErstelleOutfit);
+        button_weiter.setOnClickListener(this);
+
         mAdapter.setOnItemClickListener(new CreateOutfitsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -70,6 +73,12 @@ public class createOutfit extends AppCompatActivity implements View.OnClickListe
             case R.id.button_abbrechen:
                 Intent intent_goToActivityMenue = new Intent(this, OutfitOption.class);
                 startActivity(intent_goToActivityMenue);
+                this.finish();
+                break;
+            case R.id.button_ErstelleOutfit:
+                Intent intent_goToUploadOutfit = new Intent(this, uploadCreatedOutfit.class);
+                intent_goToUploadOutfit.putExtra("AryLst_ChoosenImages", this.slideImages);
+                startActivity(intent_goToUploadOutfit);
                 this.finish();
                 break;
         }
