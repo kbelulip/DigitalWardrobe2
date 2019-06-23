@@ -83,3 +83,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         v_flipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
 }
+
+
+
+//tes
