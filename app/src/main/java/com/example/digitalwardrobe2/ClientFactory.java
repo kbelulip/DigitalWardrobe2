@@ -39,7 +39,6 @@ public class ClientFactory {
                     .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                     .s3Client(new AmazonS3Client(AWSMobileClient.getInstance()))
                     .build();
-
         }
     }
 
