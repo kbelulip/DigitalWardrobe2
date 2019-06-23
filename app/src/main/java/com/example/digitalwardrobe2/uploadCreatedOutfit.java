@@ -1,39 +1,24 @@
 package com.example.digitalwardrobe2;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterViewFlipper;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
-import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
-import com.apollographql.apollo.GraphQLCall;
 import com.apollographql.apollo.api.Response;
-import com.apollographql.apollo.exception.ApolloException;
 
 import java.util.ArrayList;
-
-import javax.annotation.Nonnull;
-
-import type.ModelKleidungFilterInput;
-import type.ModelStringFilterInput;
+import java.util.Arrays;
+import java.util.List;
 
 public class uploadCreatedOutfit extends AppCompatActivity implements View.OnClickListener {
-
-    AdapterViewFlipper AVF;
-    MyAdapterFlipper mAdapter;
-
-    private ArrayList<ListKleidungsQuery.Item> mKleidungs;
-    private final String TAG = MainActivity.class.getSimpleName();
+    ViewFlipper v_flipper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +40,10 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         Button btn_zuruek = findViewById(R.id.button_abbrechen);
         btn_zuruek.setOnClickListener(this);
 
-        AVF = findViewById(R.id.AVF);
+        TextView textView_showArray = findViewById(R.id.textView_showArrayList);
+        textView_showArray.setText(Arrays.deepToString(choosenImages.toArray()));
 
-        mAdapter = new MyAdapterFlipper(this);
-        AVF.setAdapter(mAdapter);
-
-        AVF.setFlipInterval(10000);
-        AVF.setAutoStart(true);
-
-        //TextView textView_showArray = findViewById(R.id.textView_showArrayList);
-        //textView_showArray.setText(Arrays.deepToString(choosenImages.toArray()));
+        v_flipper = findViewById(R.id.v_flipper);
     }
 
     @Override
@@ -91,49 +70,16 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void flipperImages(int image) {
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(image);
 
+        v_flipper.addView(imageView);
+        v_flipper.setFlipInterval(4000);
+        v_flipper.setAutoStart(true);
 
-        // Query list data when we return to the screen
-        query();
+        //animation
+        v_flipper.setInAnimation(this, android.R.anim.slide_in_left);
+        v_flipper.setOutAnimation(this, android.R.anim.slide_out_right);
     }
-
-    public void query(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            Log.d(TAG, "WRITE_EXTERNAL_STORAGE permission not granted! Requesting...");
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    2);
-        }
-
-        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(ModelKleidungFilterInput.builder().user(ModelStringFilterInput.builder().eq(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
-                .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
-                .enqueue(queryCallback);
-    }
-
-    private GraphQLCall.Callback<ListKleidungsQuery.Data> queryCallback = new GraphQLCall.Callback<ListKleidungsQuery.Data>() {
-        @Override
-        public void onResponse(@Nonnull Response<ListKleidungsQuery.Data> response) {
-
-            mKleidungs = new ArrayList<>(response.data().listKleidungs().items());
-            Log.i(TAG, "Retrieved list items: " + mKleidungs.toString());
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mAdapter.setItems(mKleidungs);
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
-        }
-
-        @Override
-        public void onFailure(@Nonnull ApolloException e) {
-            Log.e(TAG, e.toString());
-        }
-    };
 }
