@@ -141,17 +141,9 @@ public class createOutfit extends AppCompatActivity implements View.OnClickListe
     private void fillArrayListSliderImages(String imageID) {
         if(slideImages.contains(imageID)) {
             slideImages.remove(imageID);
-            Toast.makeText(getApplicationContext(), imageID+" wurde der aus der Liste entfernt"+
-                            System.getProperty("line.sperator") + System.getProperty("line.sperator") +
-                            Arrays.deepToString(slideImages.toArray()),
-                    Toast.LENGTH_LONG).show();
         }
         else {
             slideImages.add(imageID);
-            Toast.makeText(getApplicationContext(), imageID+" wurde der Liste hinzugefügt"+
-                            System.getProperty("line.sperator") + System.getProperty("line.sperator")+
-                            Arrays.deepToString(slideImages.toArray()),
-                    Toast.LENGTH_LONG).show();
         }
     }
 

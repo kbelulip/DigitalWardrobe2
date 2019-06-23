@@ -8,6 +8,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
@@ -30,6 +34,7 @@ import type.ModelStringFilterInput;
 public class uploadCreatedOutfit extends AppCompatActivity implements View.OnClickListener {
 
     AdapterViewFlipper AVF;
+    private GestureDetector mGestureDetector;
     MyAdapterFlipper mAdapter;
 
     private ArrayList<ListKleidungsQuery.Item> mKleidungs;
@@ -60,12 +65,62 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         mAdapter = new MyAdapterFlipper(this);
         AVF.setAdapter(mAdapter);
 
-        AVF.setFlipInterval(10000);
-        AVF.setAutoStart(true);
+        //AVF.setFlipInterval(10000);
+        //AVF.setAutoStart(false);
+
+        // Set in/out flipping animations
+        //AVF.setInAnimation(this, android.R.anim.fade_in);
+        //AVF.setOutAnimation(this, android.R.anim.fade_out);
+
+        CustomGestureDetector customGestureDetector = new CustomGestureDetector();
+        mGestureDetector = new GestureDetector(this, customGestureDetector);
 
         //TextView textView_showArray = findViewById(R.id.textView_showArrayList);
         //textView_showArray.setText(Arrays.deepToString(choosenImages.toArray()));
     }
+
+
+    class CustomGestureDetector extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            // Swipe left (next)
+            if (e1.getX() > e2.getX()) {
+                AVF.showNext();
+            }
+            // Swipe right (previous)
+            if (e1.getX() < e2.getX()) {
+                AVF.showPrevious();
+            }
+            return super.onFling(e1, e2, velocityX, velocityY);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mGestureDetector.onTouchEvent(event);
+
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void onClick(View v) {
