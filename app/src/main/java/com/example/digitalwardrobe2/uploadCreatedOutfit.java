@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.amazonaws.amplify.generated.graphql.CreateOutfitMutation;
+import com.amazonaws.amplify.generated.graphql.CreateSchrankMutation;
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import javax.annotation.Nonnull;
 
 import type.CreateOutfitInput;
+import type.CreateSchrankInput;
 import type.ModelKleidungFilterInput;
 import type.ModelStringFilterInput;
 
@@ -65,6 +67,9 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
 
         Button btn_zuruek = findViewById(R.id.button_abbrechen);
         btn_zuruek.setOnClickListener(this);
+
+        Button btn_uploadOuttfit = findViewById(R.id.button_ErstelleOutfit);
+        btn_uploadOuttfit.setOnClickListener(this);
 
         AVF = findViewById(R.id.AVF);
 
@@ -149,6 +154,12 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
                 startActivity(intent_goToChooseImages);
                 this.finish();
                 break;
+            case R.id.button_ErstelleOutfit:
+                saveOutfit();
+                Intent intent_goToTimeline = new Intent(this, MainActivity.class);
+                startActivity(intent_goToTimeline);
+                this.finish();
+                break;
         }
     }
 
@@ -208,8 +219,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         }
     };
 
-    private void save() {
-
+    private void saveOutfit() {
 
         CreateOutfitInput input = CreateOutfitInput.builder()
                 .anlass("Test")
@@ -227,7 +237,9 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
     private GraphQLCall.Callback<CreateOutfitMutation.Data> mutateCallback = new GraphQLCall.Callback<CreateOutfitMutation.Data>() {
         @Override
         public void onResponse(@Nonnull final Response<CreateOutfitMutation.Data> response) {
-            outfitId = response.data().toString();
+            outfitId = response.data().createOutfit().id();
+            saveOutfitFinal(outfitId);
+
             Log.i(TAG, "Callback von der Outfit Mutation: " + outfitId);
         }
 
@@ -236,7 +248,48 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("", "Failed to perform AddPetMutation", e);
+                    Log.e("", "Failed to perform AddOutfitMutation", e);
+                    Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    uploadCreatedOutfit.this.finish();
+                }
+            });
+        }
+    };
+
+    private void saveOutfitFinal(String id) {
+
+        String user = AWSMobileClient.getInstance().getUsername();
+        String userId = AWSMobileClient.getInstance().getIdentityId();
+
+        for (String kleiderId: choosenImages){
+            CreateSchrankInput input = CreateSchrankInput.builder()
+                    .schrankKleiderId(kleiderId)
+                    .schrankOutfitId(id)
+                    .user(user)
+                    .userID(userId)
+                    .build();
+
+            CreateSchrankMutation addSchrankMutation = CreateSchrankMutation.builder()
+                    .input(input)
+                    .build();
+
+            ClientFactory.appSyncClient().mutate(addSchrankMutation).enqueue(mutateCallback2);
+        }
+    }
+
+    // Mutation callback code
+    private GraphQLCall.Callback<CreateSchrankMutation.Data> mutateCallback2 = new GraphQLCall.Callback<CreateSchrankMutation.Data>() {
+        @Override
+        public void onResponse(@Nonnull final Response<CreateSchrankMutation.Data> response) {
+            Log.i(TAG, "Outfit wurde im Schrank gespeichert: " + response.toString());
+        }
+
+        @Override
+        public void onFailure(@Nonnull final ApolloException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("", "Failed to perform AddSchrankMutation", e);
                     Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
                     uploadCreatedOutfit.this.finish();
                 }
