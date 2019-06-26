@@ -44,6 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
+        Log.d(TAG, "------ViewHolder-----1");
         return new ViewHolder(view, mListener);
     }
 
@@ -113,7 +114,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView txt_bezeichnung;
         ViewFlipper image_view;
-        String localUrl;
         public ImageView imvLike;
 
         ViewHolder(View itemView, final OnItemClickListener listener) {
