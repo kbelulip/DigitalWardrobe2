@@ -5,6 +5,36 @@ subscription OnCreateHerz {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -19,6 +49,36 @@ subscription OnUpdateHerz {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -33,6 +93,36 @@ subscription OnDeleteHerz {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -48,10 +138,56 @@ subscription OnCreatePost {
     outfit {
       id
       anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
     comments {
+      items {
+        id
+        content
+        post {
+          id
+          title
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          comments {
+            nextToken
+          }
+          likeCount
+          user
+          userID
+        }
+        user
+        userID
+      }
       nextToken
     }
     likeCount
@@ -66,10 +202,56 @@ subscription OnUpdatePost {
     outfit {
       id
       anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
     comments {
+      items {
+        id
+        content
+        post {
+          id
+          title
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          comments {
+            nextToken
+          }
+          likeCount
+          user
+          userID
+        }
+        user
+        userID
+      }
       nextToken
     }
     likeCount
@@ -84,10 +266,56 @@ subscription OnDeletePost {
     outfit {
       id
       anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
     comments {
+      items {
+        id
+        content
+        post {
+          id
+          title
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          comments {
+            nextToken
+          }
+          likeCount
+          user
+          userID
+        }
+        user
+        userID
+      }
       nextToken
     }
     likeCount
@@ -102,6 +330,36 @@ subscription OnCreateComment {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -117,6 +375,36 @@ subscription OnUpdateComment {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -132,9 +420,153 @@ subscription OnDeleteComment {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
+    }
+    user
+    userID
+  }
+}
+subscription OnCreateOutfit {
+  onCreateOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
+    user
+    userID
+  }
+}
+subscription OnUpdateOutfit {
+  onUpdateOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
+    user
+    userID
+  }
+}
+subscription OnDeleteOutfit {
+  onDeleteOutfit {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
     }
     user
     userID
@@ -148,6 +580,36 @@ subscription OnCreateKleidung {
     farbe
     anlass
     foto
+    outfits {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
     user
     userID
   }
@@ -160,6 +622,36 @@ subscription OnUpdateKleidung {
     farbe
     anlass
     foto
+    outfits {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
     user
     userID
   }
@@ -172,40 +664,250 @@ subscription OnDeleteKleidung {
     farbe
     anlass
     foto
-    user
-    userID
-  }
-}
-subscription OnCreateOutfit {
-  onCreateOutfit {
-    id
-    anlass
-    kleider {
+    outfits {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
       nextToken
     }
     user
     userID
   }
 }
-subscription OnUpdateOutfit {
-  onUpdateOutfit {
+subscription OnCreateSchrank {
+  onCreateSchrank {
     id
-    anlass
-    kleider {
-      nextToken
-    }
     user
     userID
+    outfit {
+      id
+      anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
+    kleider {
+      id
+      bezeichnung
+      kategorie
+      farbe
+      anlass
+      foto
+      outfits {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
   }
 }
-subscription OnDeleteOutfit {
-  onDeleteOutfit {
+subscription OnUpdateSchrank {
+  onUpdateSchrank {
     id
-    anlass
-    kleider {
-      nextToken
-    }
     user
     userID
+    outfit {
+      id
+      anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
+    kleider {
+      id
+      bezeichnung
+      kategorie
+      farbe
+      anlass
+      foto
+      outfits {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
+  }
+}
+subscription OnDeleteSchrank {
+  onDeleteSchrank {
+    id
+    user
+    userID
+    outfit {
+      id
+      anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
+    kleider {
+      id
+      bezeichnung
+      kategorie
+      farbe
+      anlass
+      foto
+      outfits {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
   }
 }

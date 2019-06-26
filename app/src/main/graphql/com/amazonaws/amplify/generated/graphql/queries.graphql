@@ -5,6 +5,36 @@ query GetHerz($id: ID!) {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -21,6 +51,31 @@ query ListHerzs(
   listHerzs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      post {
+        id
+        title
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        comments {
+          items {
+            id
+            content
+            user
+            userID
+          }
+          nextToken
+        }
+        likeCount
+        user
+        userID
+      }
       user
       userID
     }
@@ -34,10 +89,56 @@ query GetPost($id: ID!) {
     outfit {
       id
       anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
     comments {
+      items {
+        id
+        content
+        post {
+          id
+          title
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          comments {
+            nextToken
+          }
+          likeCount
+          user
+          userID
+        }
+        user
+        userID
+      }
       nextToken
     }
     likeCount
@@ -54,6 +155,36 @@ query ListPosts(
     items {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -68,6 +199,36 @@ query GetComment($id: ID!) {
     post {
       id
       title
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      comments {
+        items {
+          id
+          content
+          post {
+            id
+            title
+            likeCount
+            user
+            userID
+          }
+          user
+          userID
+        }
+        nextToken
+      }
       likeCount
       user
       userID
@@ -85,6 +246,108 @@ query ListComments(
     items {
       id
       content
+      post {
+        id
+        title
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        comments {
+          items {
+            id
+            content
+            user
+            userID
+          }
+          nextToken
+        }
+        likeCount
+        user
+        userID
+      }
+      user
+      userID
+    }
+    nextToken
+  }
+}
+query GetOutfit($id: ID!) {
+  getOutfit(id: $id) {
+    id
+    anlass
+    kleider {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
+    user
+    userID
+  }
+}
+query ListOutfits(
+  $filter: ModelOutfitFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listOutfits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
@@ -99,6 +362,36 @@ query GetKleidung($id: ID!) {
     farbe
     anlass
     foto
+    outfits {
+      items {
+        id
+        user
+        userID
+        outfit {
+          id
+          anlass
+          kleider {
+            nextToken
+          }
+          user
+          userID
+        }
+        kleider {
+          id
+          bezeichnung
+          kategorie
+          farbe
+          anlass
+          foto
+          outfits {
+            nextToken
+          }
+          user
+          userID
+        }
+      }
+      nextToken
+    }
     user
     userID
   }
@@ -116,34 +409,149 @@ query ListKleidungs(
       farbe
       anlass
       foto
+      outfits {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
       user
       userID
     }
     nextToken
   }
 }
-query GetOutfit($id: ID!) {
-  getOutfit(id: $id) {
+query GetSchrank($id: ID!) {
+  getSchrank(id: $id) {
     id
-    anlass
-    kleider {
-      nextToken
-    }
     user
     userID
+    outfit {
+      id
+      anlass
+      kleider {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
+    kleider {
+      id
+      bezeichnung
+      kategorie
+      farbe
+      anlass
+      foto
+      outfits {
+        items {
+          id
+          user
+          userID
+          outfit {
+            id
+            anlass
+            user
+            userID
+          }
+          kleider {
+            id
+            bezeichnung
+            kategorie
+            farbe
+            anlass
+            foto
+            user
+            userID
+          }
+        }
+        nextToken
+      }
+      user
+      userID
+    }
   }
 }
-query ListOutfits(
-  $filter: ModelOutfitFilterInput
+query ListSchranks(
+  $filter: ModelSchrankFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listOutfits(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listSchranks(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      anlass
       user
       userID
+      outfit {
+        id
+        anlass
+        kleider {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
+      kleider {
+        id
+        bezeichnung
+        kategorie
+        farbe
+        anlass
+        foto
+        outfits {
+          items {
+            id
+            user
+            userID
+          }
+          nextToken
+        }
+        user
+        userID
+      }
     }
     nextToken
   }

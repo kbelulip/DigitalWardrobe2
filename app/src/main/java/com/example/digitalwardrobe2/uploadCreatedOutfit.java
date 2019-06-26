@@ -17,6 +17,7 @@ import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.amazonaws.amplify.generated.graphql.CreateOutfitMutation;
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
+import type.CreateOutfitInput;
 import type.ModelKleidungFilterInput;
 import type.ModelStringFilterInput;
 
@@ -38,6 +40,10 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
     MyAdapterFlipper mAdapter;
 
     private ArrayList<ListKleidungsQuery.Item> mKleidungs;
+    private ArrayList<ListKleidungsQuery.Item> buffer;
+    private String outfitId;
+    private ArrayList<String> choosenImages;
+
     private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -46,7 +52,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_upload_created_outfit);
 
         Intent intent_getChoosenImages = getIntent();
-        ArrayList<String> choosenImages = intent_getChoosenImages.getStringArrayListExtra("AryLst_ChoosenImages");
+        choosenImages = intent_getChoosenImages.getStringArrayListExtra("AryLst_ChoosenImages");
 
         Button buttonMenue = (Button) findViewById(R.id.button_Menue);
         buttonMenue.setOnClickListener(this);
@@ -177,10 +183,20 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
             mKleidungs = new ArrayList<>(response.data().listKleidungs().items());
             Log.i(TAG, "Retrieved list items: " + mKleidungs.toString());
 
+            buffer = new ArrayList<>();
+
+            for (ListKleidungsQuery.Item current : mKleidungs) {
+                 if (choosenImages.contains(current.id())){
+                     buffer.add(current);
+                 }
+            }
+
+
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mAdapter.setItems(mKleidungs);
+                    mAdapter.setItems(buffer);
                     mAdapter.notifyDataSetChanged();
                 }
             });
@@ -191,8 +207,40 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
             Log.e(TAG, e.toString());
         }
     };
+
+    private void save() {
+
+
+        CreateOutfitInput input = CreateOutfitInput.builder()
+                .anlass("Test")
+                .build();
+
+        CreateOutfitMutation addOutfitMutation = CreateOutfitMutation.builder()
+                .input(input)
+                .build();
+
+        ClientFactory.appSyncClient().mutate(addOutfitMutation).enqueue(mutateCallback);
+
+    }
+
+    // Mutation callback code
+    private GraphQLCall.Callback<CreateOutfitMutation.Data> mutateCallback = new GraphQLCall.Callback<CreateOutfitMutation.Data>() {
+        @Override
+        public void onResponse(@Nonnull final Response<CreateOutfitMutation.Data> response) {
+            outfitId = response.data().toString();
+            Log.i(TAG, "Callback von der Outfit Mutation: " + outfitId);
+        }
+
+        @Override
+        public void onFailure(@Nonnull final ApolloException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("", "Failed to perform AddPetMutation", e);
+                    Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    uploadCreatedOutfit.this.finish();
+                }
+            });
+        }
+    };
 }
-
-
-
-//testat
