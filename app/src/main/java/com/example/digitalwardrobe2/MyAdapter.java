@@ -29,7 +29,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private OnItemClickListener mListener;
     private LayoutInflater mInflater;
     private static final String TAG = "MyAdapter";
-    MyAdapterFlipper mAdapter;
     private AmazonS3 s3client = new AmazonS3Client(AWSMobileClient.getInstance());
     private Context test;
 
@@ -106,7 +105,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             pics.add(pfade);
 
         }
-
         Log.d(TAG, "!----FlipperArray----! "+ Arrays.deepToString(pics.toArray()));
         return pics;
     }
@@ -122,6 +120,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             txt_bezeichnung = itemView.findViewById(R.id.textView_userName);
             image_view = itemView.findViewById(R.id.AVF);
+            image_view.setFlipInterval(5000);
+            image_view.setAutoStart(true);
             imvLike = itemView.findViewById(R.id.clickableImv_Like);
 
             imvLike.setOnClickListener(new View.OnClickListener() {
