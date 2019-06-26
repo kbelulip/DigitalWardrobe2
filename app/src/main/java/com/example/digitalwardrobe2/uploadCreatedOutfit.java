@@ -223,6 +223,8 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
 
         CreateOutfitInput input = CreateOutfitInput.builder()
                 .anlass("Test")
+                .user(AWSMobileClient.getInstance().getUsername())
+                .userID(AWSMobileClient.getInstance().getIdentityId())
                 .build();
 
         CreateOutfitMutation addOutfitMutation = CreateOutfitMutation.builder()
@@ -249,7 +251,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
                 @Override
                 public void run() {
                     Log.e("", "Failed to perform AddOutfitMutation", e);
-                    Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(uploadCreatedOutfit.this, "Outfit mutation fehlgeschlagen", Toast.LENGTH_SHORT).show();
                     uploadCreatedOutfit.this.finish();
                 }
             });
@@ -290,7 +292,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
                 @Override
                 public void run() {
                     Log.e("", "Failed to perform AddSchrankMutation", e);
-                    Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(uploadCreatedOutfit.this, "Schrank mutation fehlgeschlagen", Toast.LENGTH_SHORT).show();
                     uploadCreatedOutfit.this.finish();
                 }
             });
