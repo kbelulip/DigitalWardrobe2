@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
+import com.amazonaws.amplify.generated.graphql.ListSchranksQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
 import com.apollographql.apollo.GraphQLCall;
@@ -26,7 +25,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
-import type.ModelKleidungFilterInput;
+import type.ModelSchrankFilterInput;
 import type.ModelStringFilterInput;
 
 
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RecyclerView mRecyclerView;
     MyAdapter mAdapter;
 
-    private ArrayList<ListKleidungsQuery.Item> mKleidungs;
+    private ArrayList<ListSchranksQuery.Item> mKleidungs;
     private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -86,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.finish();
                 break;
             case R.id.button_Home:
-                Toast.makeText(getApplicationContext(), "Keine Funktion hinterlegt", Toast.LENGTH_LONG).show();
+                Intent intent_goToTimeline = new Intent(this, MainActivity.class);
+                startActivity(intent_goToTimeline);
+                this.finish();
                 break;
         }
     }
@@ -94,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
-
 
         // Query list data when we return to the screen
         query();
@@ -110,16 +110,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     2);
         }
 
-        ClientFactory.appSyncClient().query(ListKleidungsQuery.builder().filter(ModelKleidungFilterInput.builder().user(ModelStringFilterInput.builder().ne(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
+        ClientFactory.appSyncClient().query(ListSchranksQuery.builder().filter(ModelSchrankFilterInput.builder().user(ModelStringFilterInput.builder().ne(AWSMobileClient.getInstance().getUsername()).build()).build()).build())
                 .responseFetcher(AppSyncResponseFetchers.CACHE_AND_NETWORK)
                 .enqueue(queryCallback);
     }
 
-    private GraphQLCall.Callback<ListKleidungsQuery.Data> queryCallback = new GraphQLCall.Callback<ListKleidungsQuery.Data>() {
+    private GraphQLCall.Callback<ListSchranksQuery.Data> queryCallback = new GraphQLCall.Callback<ListSchranksQuery.Data>() {
         @Override
-        public void onResponse(@Nonnull Response<ListKleidungsQuery.Data> response) {
+        public void onResponse(@Nonnull Response<ListSchranksQuery.Data> response) {
 
-            mKleidungs = new ArrayList<>(response.data().listKleidungs().items());
+            mKleidungs = new ArrayList<>(response.data().listSchranks().items());
             Log.i(TAG, "Retrieved list items: " + mKleidungs.toString());
 
             runOnUiThread(new Runnable() {

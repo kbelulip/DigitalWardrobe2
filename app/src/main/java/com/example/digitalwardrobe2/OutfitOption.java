@@ -1,13 +1,10 @@
 package com.example.digitalwardrobe2;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.amazonaws.amplify.generated.graphql.CreateOutfitMutation;
 
 public class OutfitOption extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,7 +53,9 @@ public class OutfitOption extends AppCompatActivity implements View.OnClickListe
                 this.finish();
                 break;
             case R.id.button_Home:
-                Toast.makeText(getApplicationContext(), "Keine Funktion hinterlegt", Toast.LENGTH_LONG).show();
+                Intent intent_goToTimeline = new Intent(this, MainActivity.class);
+                startActivity(intent_goToTimeline);
+                this.finish();
                 break;
         }
     }

@@ -23,11 +23,11 @@
             android:id="@+id/textView_userName"/>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/image_view"
+    <ViewFlipper
+        android:id="@+id/AVF"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:maxHeight="200dp"/>
+        android:layout_height="300dp">
+    </ViewFlipper>
 
     <LinearLayout
         android:layout_width="match_parent"
