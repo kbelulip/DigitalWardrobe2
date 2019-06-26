@@ -8,15 +8,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterViewFlipper;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.amazonaws.amplify.generated.graphql.CreateOutfitMutation;
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
@@ -28,16 +25,19 @@ import java.util.ArrayList;
 
 import javax.annotation.Nonnull;
 
+import type.CreateOutfitInput;
 import type.ModelKleidungFilterInput;
 import type.ModelStringFilterInput;
 
 public class uploadCreatedOutfit extends AppCompatActivity implements View.OnClickListener {
 
     AdapterViewFlipper AVF;
-    private GestureDetector mGestureDetector;
     MyAdapterFlipper mAdapter;
 
     private ArrayList<ListKleidungsQuery.Item> mKleidungs;
+    private ArrayList<ListKleidungsQuery.Item> buffer;
+    private String outfitId;
+    private ArrayList<String> choosenImages;
     private final String TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -46,7 +46,7 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_upload_created_outfit);
 
         Intent intent_getChoosenImages = getIntent();
-        ArrayList<String> choosenImages = intent_getChoosenImages.getStringArrayListExtra("AryLst_ChoosenImages");
+        choosenImages = intent_getChoosenImages.getStringArrayListExtra("AryLst_ChoosenImages");
 
         Button buttonMenue = (Button) findViewById(R.id.button_Menue);
         buttonMenue.setOnClickListener(this);
@@ -65,62 +65,12 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
         mAdapter = new MyAdapterFlipper(this);
         AVF.setAdapter(mAdapter);
 
-        //AVF.setFlipInterval(10000);
-        //AVF.setAutoStart(false);
-
-        // Set in/out flipping animations
-        //AVF.setInAnimation(this, android.R.anim.fade_in);
-        //AVF.setOutAnimation(this, android.R.anim.fade_out);
-
-        CustomGestureDetector customGestureDetector = new CustomGestureDetector();
-        mGestureDetector = new GestureDetector(this, customGestureDetector);
+        AVF.setFlipInterval(2000);
+        AVF.setAutoStart(true);
 
         //TextView textView_showArray = findViewById(R.id.textView_showArrayList);
         //textView_showArray.setText(Arrays.deepToString(choosenImages.toArray()));
     }
-
-
-    class CustomGestureDetector extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            // Swipe left (next)
-            if (e1.getX() > e2.getX()) {
-                AVF.showNext();
-            }
-            // Swipe right (previous)
-            if (e1.getX() < e2.getX()) {
-                AVF.showPrevious();
-            }
-            return super.onFling(e1, e2, velocityX, velocityY);
-        }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mGestureDetector.onTouchEvent(event);
-
-        return super.onTouchEvent(event);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public void onClick(View v) {
@@ -177,10 +127,18 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
             mKleidungs = new ArrayList<>(response.data().listKleidungs().items());
             Log.i(TAG, "Retrieved list items: " + mKleidungs.toString());
 
+            buffer = new ArrayList<>();
+
+            for (ListKleidungsQuery.Item current : mKleidungs) {
+                 if (choosenImages.contains(current.id())){
+                     buffer.add(current);
+                 }
+            }
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mAdapter.setItems(mKleidungs);
+                    mAdapter.setItems(buffer);
                     mAdapter.notifyDataSetChanged();
                 }
             });
@@ -191,8 +149,40 @@ public class uploadCreatedOutfit extends AppCompatActivity implements View.OnCli
             Log.e(TAG, e.toString());
         }
     };
+
+    private void save() {
+
+
+        CreateOutfitInput input = CreateOutfitInput.builder()
+                .anlass("Test")
+                .build();
+
+        CreateOutfitMutation addOutfitMutation = CreateOutfitMutation.builder()
+                .input(input)
+                .build();
+
+        ClientFactory.appSyncClient().mutate(addOutfitMutation).enqueue(mutateCallback);
+
+    }
+
+    // Mutation callback code
+    private GraphQLCall.Callback<CreateOutfitMutation.Data> mutateCallback = new GraphQLCall.Callback<CreateOutfitMutation.Data>() {
+        @Override
+        public void onResponse(@Nonnull final Response<CreateOutfitMutation.Data> response) {
+            outfitId = response.data().toString();
+            Log.i(TAG, "Callback von der Outfit Mutation: " + outfitId);
+        }
+
+        @Override
+        public void onFailure(@Nonnull final ApolloException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("", "Failed to perform AddPetMutation", e);
+                    Toast.makeText(uploadCreatedOutfit.this, "Failed to add pet", Toast.LENGTH_SHORT).show();
+                    uploadCreatedOutfit.this.finish();
+                }
+            });
+        }
+    };
 }
-
-
-
-//testa

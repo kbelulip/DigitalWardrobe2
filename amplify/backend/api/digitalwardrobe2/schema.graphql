@@ -20,6 +20,13 @@ type Comment @model {
   user: String
   userID: String
 }
+type Outfit @model {
+  id: ID!
+  anlass: String
+  kleider: [Schrank] @connection(name: "OutfitSchrank")
+  user: String
+  userID: String
+}
 type Kleidung @model {
   id: ID!
   bezeichnung: String
@@ -27,16 +34,15 @@ type Kleidung @model {
   farbe: String
   anlass: String
   foto: String
+  outfits: [Schrank] @connection(name: "KleidungSchrank")
   user: String
   userID: String
 }
-type Outfit @model {
+type Schrank @model {
   id: ID!
-  anlass: String
-  kleider: [Kleidung] @connection
   user: String
   userID: String
+  outfit: Outfit! @connection(name: "OutfitSchrank")
+  kleider: Kleidung! @connection(name: "KleidungSchrank")
 }
-
-
 

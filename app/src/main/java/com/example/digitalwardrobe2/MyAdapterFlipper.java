@@ -24,7 +24,6 @@ public class MyAdapterFlipper extends BaseAdapter {
 
     private List<ListKleidungsQuery.Item> mData = new ArrayList<>();
     private LayoutInflater fInflater;
-    private String localUrl;
     private TextView txt_bezeichnung;
     private ImageView image_view;
     private Context test;
