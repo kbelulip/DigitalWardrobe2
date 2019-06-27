@@ -16,13 +16,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.amazonaws.amplify.generated.graphql.ListKleidungsQuery;
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class CreateOutfitsAdapter extends RecyclerView.Adapter<CreateOutfitsAdapter.MyViewHolder> {
@@ -30,10 +36,13 @@ public class CreateOutfitsAdapter extends RecyclerView.Adapter<CreateOutfitsAdap
     private CreateOutfitsAdapter.OnItemClickListener mListener;
     private LayoutInflater mInflater;
     private static final String TAG = "CreateOutfitsAdapter";
+    private AmazonS3 s3client = new AmazonS3Client(AWSMobileClient.getInstance());
+    private Context test;
 
     // data is passed into the constructor
     CreateOutfitsAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
+        this.test = context;
     }
 
     @NonNull
@@ -90,53 +99,12 @@ public class CreateOutfitsAdapter extends RecyclerView.Adapter<CreateOutfitsAdap
         }
 
         void bindData(ListKleidungsQuery.Item item) {
+            Date today = new Date();
+            Date tomorrow = new Date(today.getTime() + (1000 * 60 * 60 * 24));
 
-            if (item.foto() != null) {
-                if (localUrl == null) {
-                    downloadWithTransferUtility(item.foto());
-                } else {
-                    imageview_Cloth.setImageBitmap(BitmapFactory.decodeFile(localUrl));
-                }
-            }
-            else
-                imageview_Cloth.setImageBitmap(null);
-        }
-
-        private void downloadWithTransferUtility(final String photo) {
-            final String localPath = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/" + photo;
-
-            TransferObserver downloadObserver =
-                    ClientFactory.transferUtility().download(
-                            photo,
-                            new File(localPath));
-
-            // Attach a listener to the observer to get state update and progress notifications
-            downloadObserver.setTransferListener(new TransferListener() {
-
-                @Override
-                public void onStateChanged(int id, TransferState state) {
-                    if (TransferState.COMPLETED == state) {
-                        // Handle a completed upload.
-                        localUrl = localPath;
-                        imageview_Cloth.setImageBitmap(BitmapFactory.decodeFile(localPath));
-                    }
-                }
-
-                @Override
-                public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                    float percentDonef = ((float) bytesCurrent / (float) bytesTotal) * 100;
-                    int percentDone = (int) percentDonef;
-
-                    Log.d(TAG, "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                }
-
-                @Override
-                public void onError(int id, Exception ex) {
-                    // Handle errors
-                    Log.e(TAG, "Unable to download the file.", ex);
-                }
-            });
+            URL url = s3client.generatePresignedUrl("digitalwardrobe272101745e6b14d1f84c01ba2812efb86-master", item.foto(), tomorrow);
+            Log.d(TAG, "!----URL----! "+ url);
+            Picasso.with(test).load(String.valueOf(url)).into(imageview_Cloth);
         }
     }
 
