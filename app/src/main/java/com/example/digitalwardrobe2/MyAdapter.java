@@ -120,13 +120,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             txt_bezeichnung = itemView.findViewById(R.id.textView_userName);
             image_view = itemView.findViewById(R.id.AVF);
-            image_view.setFlipInterval(5000);
+            image_view.setFlipInterval(3000);
             image_view.setAutoStart(true);
             imvLike = itemView.findViewById(R.id.clickableImv_Like);
 
             imvLike.setOnClickListener(new View.OnClickListener() {
+                Boolean giveLike = false;
                 @Override
                 public void onClick(View v) {
+                    if(giveLike == false) {
+                        imvLike.setBackgroundResource(R.drawable.ic_like_24dp);
+                        giveLike = true;
+                    }
+                    else {
+                        imvLike.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
+                        giveLike = false;
+                    }
                     if(listener != null) {
                         int position = getAdapterPosition();
                         if(position != RecyclerView.NO_POSITION) {
